@@ -1,8 +1,10 @@
+<script src="../assets/js/star.js"></script>
+
 <div class="d-flex justify-content-center">
     <div class="row">
         <div class="col-md-12">
             <div class="stars">
-                <form id="rateFrom" action="POST" onclick="event.preventDefault(); alert('Unauthorized! Log in to rate.'); document.getElementById('rateFrom').reset();"><input class="star star-5" id="star-5" type="radio" name="star"/> <label
+                <form id="rateFrom" action="POST" <?php if (!isset($_SESSION["user"])) echo 'onclick="block(event)"' ?> ><input class="star star-5" id="star-5" type="radio" name="star"/> <label
                             class="star star-5" for="star-5"></label> <input class="star star-4" id="star-4"
                                                                              type="radio" name="star"/> <label
                             class="star star-4" for="star-4"></label> <input class="star star-3" id="star-3"

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap");
 body {
-  background: #f8f9fa;
-  background: linear-gradient(0deg, #f8f9fa 20%, #b3f2ff 100%);
+  background: rgb(223,239,255);
+  background: linear-gradient(0deg, rgba(223,239,255,1) 25%, rgba(255,244,218,1) 50%, rgba(223,239,255,1) 85%);
 }
 body main {
   margin: 5em auto;
