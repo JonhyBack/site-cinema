@@ -47,22 +47,35 @@
     <div class="container">
         <h1 style="font-family: 'Roboto', sans-serif; text-align: center;">Vinland Saga`s Episodes</h1>
 
-        <div class="row">
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <a class="card-body scale" href="watch">
-                        <img src="img.png" class="img-thumbnail" alt="1_episode">
-                        <h5 class="card-title">1. Somewhere not here</h5>
-                        <p>Rated: <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span></p>
-                    </a>
-                </div>
-            </div>
-        </div>
+        <?php
+        require_once "db.php";
 
+        $episodes_beans = R::findAll('episodes');
+        $episodes = R::exportAll($episodes_beans);
+
+        for ($c = 0; $c < count($episodes); $c += 3) {
+            echo '<div class="row mb-4">';
+
+            for ($i = $c;$i < $c + 3 and $i < count($episodes); $i++) {
+                echo '<div class="col-4">
+                        <div class="card" style="width: 18rem;">
+                            <a class="card-body scale" href="watch">
+                                <img src="' . $episodes[$i]["preview_image_path"] . '" class="img-thumbnail" alt="' . $episodes[$i]["episode"] . '_episode">
+                                <h5 class="card-title">' . $episodes[$i]["episode"] . '. ' . $episodes[$i]["title"] . '</h5>
+                                <p>Rated: <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span></p>
+                            </a>
+                        </div>
+                    </div>
+                ';
+            }
+
+            echo '</div>';
+        }
+        ?>
     </div>
 </main>
 

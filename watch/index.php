@@ -35,17 +35,40 @@
 <main>
     <div class="container" style="max-width: 50%;">
         <div class="embed-responsive embed-responsive-16by9">
-            <video id="js-media-player" class="embed-responsive-item" preload="none" playsinline controls
-                   poster="https://gen.jut.su/uploads/preview/269/0/0/1_1562657226.jpg">
-                <source src="https://r150201.kujo-jotaro.com/vinland-saga/1.1080.f595493806356099.mp4?hash1=cf1ff8b4fba3cf4d488b466b06fe31be&amp;hash2=2418139503e967387753eec6f2e4b4d2"
-                        type="video/mp4" lang="ru" size="1080">
-                <source src="https://r150201.kujo-jotaro.com/vinland-saga/1.720.fa16763cec5144a8.mp4?hash1=0edb886de11098886d96d127133ab679&amp;hash2=8fdc5b957840076e74ab7c7aa5315c55"
-                        type="video/mp4" lang="ru" size="720">
-                <source src="https://r150201.kujo-jotaro.com/vinland-saga/1.480.98e2861ff2edf065.mp4?hash1=30e4a570f132c6f6ffba20e29e5a405c&amp;hash2=81ee7d0d9c8325d8a4e30fd28684eb84"
-                        type="video/mp4" lang="ru" size="480">
-                <source src="https://r150201.kujo-jotaro.com/vinland-saga/1.360.ebd94cc457f2a7cc.mp4?hash1=3d001d2d462a706fe2785a78cd79c2fb&amp;hash2=e69fb73cb8e7a6d578c642177c0ae51f"
-                        type="video/mp4" lang="ru" size="360">
-            </video>
+            <?php
+            error_reporting(E_ERROR | E_PARSE);
+
+            $html = file_get_contents('https://jut.su/vinland-saga/episode-1.html');
+            $dom = new DOMDocument;
+            $dom->loadHTML($html);
+            $xpath = new DOMXPath($dom);
+
+            $video = $xpath->query('//video');
+
+            if ($video->length == 1) {
+                $poster = $xpath->query('//video/@poster');
+                $sources = $xpath->query('//video/source');
+
+                if ($poster->length > 0 and $sources->length > 0) {
+                    echo '<video id="js-media-player" class="embed-responsive-item"
+                     preload="none" playsinline control 
+                     poster="' . $poster->item(0)->nodeValue . '">';
+
+                    for($i=0; $i<$sources->length; $i++)
+                    {
+                        echo '<source src="'. $sources->item($i)->attributes['src']->nodeValue .'"
+                                    type="video/mp4" lang="ru" 
+                                    size="'. $sources->item($i)->attributes->item(4)->nodeValue .'">';
+                    }
+
+                    echo '</video>';
+                }
+            } else {
+                echo 'Something went wrong';
+            }
+
+            ?>
+
         </div>
 
         <?php require "star.php" ?>
