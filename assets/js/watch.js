@@ -1,3 +1,10 @@
-const controls = ['play-large', 'play', 'fast-forward', 'progress', 'current-time', 'duration', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen']
+function rate(e) {
+    $("#rateFrom").ajaxSubmit({url: 'rate.php', type: 'post'});
+    console.log($('#rateFrom').serialize())
+}
 
-new Plyr('#js-media-player', {controls});
+const block = (e) => {
+    e.preventDefault();
+    alert('Unauthorized! Log in to rate.');
+    document.getElementById('rateFrom').reset();
+}

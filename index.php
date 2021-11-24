@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Vinland Saga</title>
+    <title>Anime site</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -35,6 +35,15 @@
         .scale:hover {
             transform: scale(1.05);
         }
+
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, .3);
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -45,23 +54,23 @@
 
 <main>
     <div class="container">
-        <h1 style="font-family: 'Roboto', sans-serif; text-align: center;">Vinland Saga`s Episodes</h1>
+        <h1>List of titles</h1>
 
         <?php
         require_once "db.php";
 
-        $episodes_beans = R::findAll('episodes');
-        $episodes = R::exportAll($episodes_beans);
+        $titles_beans = R::findAll('titles');
+        $titles = R::exportAll($titles_beans);
 
-        for ($c = 0; $c < count($episodes); $c += 3) {
+        for ($c = 0; $c < count($titles); $c += 4) {
             echo '<div class="row mb-4">';
 
-            for ($i = $c;$i < $c + 3 and $i < count($episodes); $i++) {
-                echo '<div class="col-4">
-                        <div class="card" style="width: 18rem;">
-                            <a class="card-body scale" href="watch">
-                                <img src="' . $episodes[$i]["preview_image_path"] . '" class="img-thumbnail" alt="' . $episodes[$i]["episode"] . '_episode">
-                                <h5 class="card-title">' . $episodes[$i]["episode"] . '. ' . $episodes[$i]["title"] . '</h5>
+            for ($i = $c; $i < $c + 4 and $i < count($titles); $i++) {
+                echo '<div class="col-3">
+                        <div class="card">
+                            <a class="card-body scale" href="watch/index.php?id=' . $titles[$i]["kinopoisk_id"] . '">
+                                <img src="' . $titles[$i]["poster_url"] . '" class="img-thumbnail" alt="' . $titles[$i]["title"] . '_img">
+                                <h5 class="card-title">' . $titles[$i]["title"] . '</h5>
                                 <p>Rated: <span class="fa fa-star checked"></span>
                                     <span class="fa fa-star checked"></span>
                                     <span class="fa fa-star checked"></span>

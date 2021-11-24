@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap");
 body {
-  background: rgb(223,239,255);
-  background: linear-gradient(0deg, rgba(223,239,255,1) 25%, rgba(255,244,218,1) 50%, rgba(223,239,255,1) 85%);
+  background: #dfefff;
+  background: linear-gradient(0deg, #dfefff 25%, #fff4da 50%, #dfefff 85%);
 }
 body main {
-  margin: 5em auto;
+  margin-top: 5em;
 }
 
 /*# sourceMappingURL=styles.css.map */
