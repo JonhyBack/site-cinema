@@ -19,7 +19,11 @@
 </head>
 <body>
 
-<?php require __DIR__ . "/../nav.php" ?>
+<?php
+require "../auth/login.php";
+require "../auth/signup.php";
+require "../nav.php";
+?>
 
 <main>
     <div class="container" style="max-width: 50%;">
@@ -36,7 +40,7 @@
     </div>
 </main>
 
-<?php require __DIR__ . "/../footer.php" ?>
+<?php require "../footer.php" ?>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -48,5 +52,3 @@
 <script src="../assets/js/watch.js"></script>
 </body>
 </html>
-
-

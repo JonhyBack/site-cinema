@@ -50,6 +50,10 @@
 </head>
 <body>
 
+<?php
+require "./auth/login.php";
+require "./auth/signup.php";
+?>
 <?php require "nav.php" ?>
 
 <main>

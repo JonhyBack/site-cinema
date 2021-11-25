@@ -1,8 +1,3 @@
-<?php
-require __DIR__ . "\auth\login.php";
-require __DIR__ . "\auth\signup.php";
-?>
-
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarCollapse">
