@@ -58,27 +58,34 @@
 
         <?php
         require_once "db.php";
+        $col = 4;
 
         $titles_beans = R::findAll('titles');
         $titles = R::exportAll($titles_beans);
 
-        for ($c = 0; $c < count($titles); $c += 4) {
+        for ($c = 0; $c < count($titles); $c += $col) {
             echo '<div class="row mb-4">';
 
-            for ($i = $c; $i < $c + 4 and $i < count($titles); $i++) {
+            for ($i = $c; $i < $c + $col and $i < count($titles); $i++) {
                 echo '<div class="col-3">
                         <div class="card">
                             <a class="card-body scale" href="watch/index.php?id=' . $titles[$i]["kinopoisk_id"] . '">
                                 <img src="' . $titles[$i]["poster_url"] . '" class="img-thumbnail" alt="' . $titles[$i]["title"] . '_img">
-                                <h5 class="card-title">' . $titles[$i]["title"] . '</h5>
-                                <p>Rated: <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span></p>
-                            </a>
-                        </div>
+                                <h5 class="card-title">' . $titles[$i]["title"] . '</h5>';
+                echo '<p>Rated: ';
+
+                for ($j = 1; $j <= 5; $j++) {
+                    if ($j <= $titles[$i]["rating"]) {
+                        echo '<span class="fa fa-star checked"></span>';
+                    } else {
+                        echo '<span class="fa fa-star"></span>';
+                    }
+                }
+
+                echo '</p>';
+                echo '</a>
                     </div>
+                </div>
                 ';
             }
 
