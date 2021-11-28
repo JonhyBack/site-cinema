@@ -9,7 +9,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-68H9K2W6BE"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-68H9K2W6BE');
@@ -52,6 +56,13 @@
 
         .card {
             background-color: rgba(255, 255, 255, .3);
+            max-width: 250px;
+        }
+
+        @media screen and (max-width: 425px) {
+            div.row {
+                margin-left: 2em;
+            }
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -76,34 +87,30 @@ require "./auth/signup.php";
         $titles_beans = R::findAll('titles');
         $titles = R::exportAll($titles_beans);
 
-        for ($c = 0; $c < count($titles); $c += $col) {
-            echo '<div class="row mb-4">';
-
-            for ($i = $c; $i < $c + $col and $i < count($titles); $i++) {
-                echo '<div class="col-3">
-                        <div class="card">
+        echo '<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">';
+        for ($i = 0; $i < count($titles); $i++) {
+            echo '<div class="col">
+                        <div class="card mb-5">
                             <a class="card-body scale" href="watch/index.php?id=' . $titles[$i]["kinopoisk_id"] . '">
                                 <img src="' . $titles[$i]["poster_url"] . '" class="img-thumbnail" alt="' . $titles[$i]["title"] . '_img">
                                 <h5 class="card-title">' . $titles[$i]["title"] . '</h5>';
-                echo '<p>Rated: ';
+            echo '<p>Rated: ';
 
-                for ($j = 1; $j <= 5; $j++) {
-                    if ($j <= $titles[$i]["rating"]) {
-                        echo '<span class="fa fa-star checked"></span>';
-                    } else {
-                        echo '<span class="fa fa-star"></span>';
-                    }
+            for ($j = 1; $j <= 5; $j++) {
+                if ($j <= $titles[$i]["rating"]) {
+                    echo '<span class="fa fa-star checked"></span>';
+                } else {
+                    echo '<span class="fa fa-star"></span>';
                 }
+            }
 
-                echo '</p>';
-                echo '</a>
+            echo '</p>';
+            echo '</a>
                     </div>
                 </div>
                 ';
-            }
-
-            echo '</div>';
         }
+        echo '</div>';
         ?>
     </div>
 </main>

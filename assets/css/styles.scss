@@ -8,3 +8,15 @@ body {
     margin-top: 5em;
   }
 }
+
+@media screen and (max-width: 425px) {
+  .container {
+    max-width: 100%;
+  }
+
+  div.container.ms-5 {
+    margin-left: 0 !important;
+  }
+}
+
+

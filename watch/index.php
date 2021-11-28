@@ -25,6 +25,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <style>
+        #kinoplayertop-buttons {
+            z-index: 0 !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -35,7 +40,7 @@ require "../nav.php";
 ?>
 
 <main>
-    <div class="container" style="max-width: 50%;">
+    <div class="container">
         <div class="embed-responsive embed-responsive-16by9">
             <?php if (isset($_GET['id'])) {
                 echo '<div id="kinoplayertop" data-kinopoisk="' . $_GET['id'] . ' "></div>';
@@ -43,8 +48,7 @@ require "../nav.php";
             ?>
         </div>
 
-
-        <?php require "star.php" ?>
+        <?php if (isset($_SESSION["user"])) require "star.php"; else echo '<div class="d-flex justify-content-center">Login to rate.</div>' ?>
 
     </div>
 </main>
