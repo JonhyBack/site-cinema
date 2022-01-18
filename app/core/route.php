@@ -32,27 +32,25 @@ class Route
         $model_file = strtolower($model_name) . '.php';
         $model_path = "app/models/" . $model_file;
 
-        if (file_exists($model_path)) {
-            include_once $model_path;
-        }
-
         $controller_file = $controller_name . '.php';
         $controller_path = "app/controllers/" . $controller_file;
 
-        if (file_exists($controller_path)) {
+        try {
+            include_once $model_path;
             include_once $controller_path;
-        } else {
-            // Route::error_page_404();
-        }
 
-        echo class_exists($controller_name) ? 'true' : 'false';
-        $controller = new $controller_name();
+            echo class_exists($controller_name) ? 'true' : 'false';
+            $controller = new $controller_name();
 
-        if (method_exists($controller, $action)) {
-            Route::process_attributes($controller, $action);
-            $controller->$action();
-        } else {
-            // Route::error_page_404();
+            if (method_exists($controller, $action)) {
+                Route::process_attributes($controller, $action);
+                $controller->$action();
+            } else {
+//                throw;
+                // Route::error_page_404();
+            }
+        } catch (Exception) {
+            Route::error_page_404();
         }
     }
 
