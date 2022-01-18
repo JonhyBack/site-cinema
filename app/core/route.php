@@ -37,13 +37,13 @@ class Route
 
         $controller_file = strtolower($controller_name) . '.php';
         $controller_path = "../controllers/" . $controller_file;
-        echo __DIR__;
+        echo __DIR__ . $controller_path;
         if (file_exists($controller_path)) {
             include_once $controller_path;
         } else {
             // Route::error_page_404();
         }
-
+        echo class_exists($controller_name);
         $controller = new $controller_name();
 
         if (method_exists($controller, $action)) {
