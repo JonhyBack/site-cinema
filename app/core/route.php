@@ -36,9 +36,7 @@ class Route
         $controller_path = "app/controllers/" . $controller_file;
 
         try {
-
-                include_once $model_path;
-
+            include_once $model_path;
             require_once $controller_path;
 
             $controller = new $controller_name();
