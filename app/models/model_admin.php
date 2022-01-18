@@ -21,12 +21,12 @@ class Admin extends Model
 
     public function remove_title($id)
     {
-        R::trashBatch('titles', [$id]);
-
         $title = R::findOne('titles', 'id = ?', [$id]);
         $kinopoisk_id = $title["kinopoisk_id"];
 
         $ratings = R::find('ratings', 'kinopoisk_id = ?', [$kinopoisk_id]);
+
+        R::trashBatch('titles', [$id]);
         R::trashAll($ratings);
     }
 
