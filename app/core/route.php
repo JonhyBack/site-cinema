@@ -30,20 +30,21 @@ class Route
         $action = 'action_' . $action_name;
 
         $model_file = strtolower($model_name) . '.php';
-        $model_path = "/../models/" . $model_file;
+        $model_path = "app/models/" . $model_file;
+
         if (file_exists($model_path)) {
             include_once $model_path;
         }
 
-        $controller_file = strtolower($controller_name) . '.php';
-        $controller_path = __DIR__ . "/../controllers/" . $controller_file;
+        $controller_file = $controller_name . '.php';
+        $controller_path = "app/controllers/" . $controller_file;
 
         if (file_exists($controller_path)) {
             include_once $controller_path;
         } else {
             // Route::error_page_404();
         }
-        require_once 'app/controllers/homeController.php';
+
         echo class_exists($controller_name) ? 'true' : 'false';
         $controller = new $controller_name();
 
