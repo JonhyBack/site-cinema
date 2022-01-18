@@ -10877,7 +10877,7 @@ use RedBeanPHP\OODBBean as OODBBean;
  * a toolbox. The Helper also facilitates the FUSE feature,
  * determining how beans relate to their models. By overriding
  * the getModelForBean method you can tune the FUSEing to
- * fit your business application needs.
+ * fit your business app needs.
  *
  * @file    RedBeanPHP/IBeanHelper.php
  * @author  Gabor de Mooij and the RedBeanPHP Community
@@ -16968,7 +16968,7 @@ namespace RedBeanPHP {
  * RedBean Plugin.
  * Marker interface for plugins.
  * Use this interface when defining new plugins, it's an
- * easy way for the rest of the application to recognize your
+ * easy way for the rest of the app to recognize your
  * plugin. This plugin interface does not require you to
  * implement a specific API.
  *
