@@ -40,7 +40,7 @@ class Route
         if (file_exists($controller_path)) {
             include_once $controller_path;
         } else {
-            Route::error_page_404();
+            // Route::error_page_404();
         }
 
         $controller = new $controller_name();
@@ -49,7 +49,7 @@ class Route
             Route::process_attributes($controller, $action);
             $controller->$action();
         } else {
-            Route::error_page_404();
+            // Route::error_page_404();
         }
     }
 
