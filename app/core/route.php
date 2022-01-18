@@ -4,7 +4,7 @@
 use JetBrains\PhpStorm\NoReturn;
 
 // Defaults
-const CONTROLLER_NAME = 'Home';
+const CONTROLLER_NAME = 'home';
 const ACTION_NAME = 'index';
 
 class Route
