@@ -30,13 +30,13 @@ class Route
         $action = 'action_' . $action_name;
 
         $model_file = strtolower($model_name) . '.php';
-        $model_path = "app/models/" . $model_file;
+        $model_path = "app/app/models/" . $model_file;
         if (file_exists($model_path)) {
             include_once $model_path;
         }
 
         $controller_file = strtolower($controller_name) . '.php';
-        $controller_path = "app/controllers/" . $controller_file;
+        $controller_path = "app/app/controllers/" . $controller_file;
         if (file_exists($controller_path)) {
             include_once $controller_path;
         } else {
