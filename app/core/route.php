@@ -37,6 +37,7 @@ class Route
 
         $controller_file = strtolower($controller_name) . '.php';
         $controller_path = "../controllers/" . $controller_file;
+        echo __DIR__;
         if (file_exists($controller_path)) {
             include_once $controller_path;
         } else {
