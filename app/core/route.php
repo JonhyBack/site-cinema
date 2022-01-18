@@ -36,18 +36,18 @@ class Route
         $controller_path = "app/controllers/" . $controller_file;
 
         try {
-            include_once $model_path;
-            include_once $controller_path;
+            if (file_exists($model_path))
+                include_once $model_path;
 
-            echo class_exists($controller_name) ? 'true' : 'false';
+            require_once $controller_path;
+
             $controller = new $controller_name();
 
             if (method_exists($controller, $action)) {
                 Route::process_attributes($controller, $action);
                 $controller->$action();
             } else {
-//                throw;
-                // Route::error_page_404();
+                throw;
             }
         } catch (Exception) {
             Route::error_page_404();
