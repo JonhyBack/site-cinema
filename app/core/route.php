@@ -36,7 +36,7 @@ class Route
         $controller_path = "app/controllers/" . $controller_file;
 
         try {
-            if (file_exists($model_path))
+
                 include_once $model_path;
 
             require_once $controller_path;
