@@ -47,6 +47,7 @@ $page = $data['page'];
         <td>' . $title['title'] . '</td>
         <td>' . $title['rating'] . '</td>
         <td>' . $title['poster_url'] . '</td>
+        <td><button type="button" data-title="' . json_encode($title) .'" onclick="editTitle(event, ' . $title['id'] . ')" class="btn btn-warning editModal">Edit</button></td>
         <td><button type="button" onclick="removeTitle(event, ' . $title['id'] . ')" class="btn btn-danger">Remove</button></td>
     </tr>';
     }
@@ -108,7 +109,7 @@ $page = $data['page'];
                     <div class="mb-3 row">
                         <label for="poster_url" class="col-sm-2 col-form-label">Poster Url</label>
                         <div class="col-sm-10">
-                            <input type="text" name="poster_url" class="form-control" id="poster_url" required>
+                            <input type="text" name="poster_url" class="form-control" id="poster_url">
                         </div>
                     </div>
                 </form>
@@ -121,11 +122,54 @@ $page = $data['page'];
     </div>
 </div>
 
+<!-- Modal Edit Title -->
+
+<div class="modal fade" id="edit-title-modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Edit Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-title">
+                    <div class="mb-3 row">
+                        <input type="hidden" name="id" id="id_edit">
+                        <label for="kinopoisk_id" class="col-sm-2 col-form-label">Kinopoisk Id</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="kinopoisk_id" class="form-control" id="kinopoisk_id_edit" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="title" class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="title" class="form-control" id="title_edit" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="poster_url" class="col-sm-2 col-form-label">Poster Url</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="poster_url" class="form-control" id="poster_url_edit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" form="edit-title">
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     let xhr = null;
 
     function removeTitle(e, id) {
         e.preventDefault();
+
+        if (!window.confirm('Are you sure you want to delete?'))
+            return;
 
         if (xhr) {
             xhr.abort();
@@ -144,6 +188,29 @@ $page = $data['page'];
             }
         });
     }
+
+    $(document).on("click", ".editModal", () => {
+         const title = JSON.parse($(this).data('title'));
+
+         $(".modal-body #kinopoisk_id_edit").val( title.kinopoisk_id );
+         $(".modal-body #title_edit").val( title.title );
+         $(".modal-body #poster_url_edit").val( title.poster_url );
+         $(".modal-body #id_edit").val( title.id );
+
+         $('#edit-title-modal').modal('show');
+    });
+
+    $('#edit-title').submit((e) => {
+        e.preventDefault();
+        const data = $('#edit-title').serializeArray();
+
+        $.post({
+            url: '<?php echo '//' . $_SERVER['HTTP_HOST'] . '/admin/editTitle' ?>',
+            data: data,
+        }).always(() => {
+            window.location.reload();
+        });
+    });
 
     $('#new-title').submit((e) => {
         e.preventDefault();

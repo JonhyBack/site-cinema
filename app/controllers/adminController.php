@@ -51,6 +51,18 @@ class AdminController extends Controller
         }
     }
 
+    #[HttpPost]
+    public function action_editTitle()
+    {
+        $check_array = array('kinopoisk_id', 'title', 'poster_url', 'id');
+
+        if (!array_diff($check_array, array_keys($_POST))) {
+            $this->model->edit_title($_POST);
+        } else {
+            http_response_code(400);
+        }
+    }
+
     private function check_admin() {
         if (!isset($_SESSION["user"]["nickname"]) or $_SESSION["user"]["nickname"] !== "admin")
         {

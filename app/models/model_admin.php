@@ -40,4 +40,15 @@ class Admin extends Model
 
         R::store($title);
     }
+
+    public function edit_title($data)
+    {
+        $title = R::findOne('titles', 'id = ?', [$data['id']);
+
+        $title['kinopoisk_id'] = $data['kinopoisk_id'];
+        $title['title'] = $data['title'];
+        $title['poster_url'] = $data['poster_url'];
+
+        R::store($title);
+    }
 }
