@@ -47,7 +47,7 @@ $page = $data['page'];
         <td>' . $title['title'] . '</td>
         <td>' . $title['rating'] . '</td>
         <td>' . $title['poster_url'] . '</td>
-        <td><button type="button" data-title="' . json_encode($title) .'" class="btn btn-warning editModal">Edit</button></td>
+        <td><button type="button" data-title=\'' . json_encode($title) .'\' class="btn btn-warning editModal">Edit</button></td>
         <td><button type="button" onclick="removeTitle(event, ' . $title['id'] . ')" class="btn btn-danger">Remove</button></td>
     </tr>';
     }
