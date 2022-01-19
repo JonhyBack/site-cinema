@@ -190,7 +190,7 @@ $page = $data['page'];
     }
 
     $(document).on("click", ".editModal", () => {
-         const title = JSON.parse($(this).data('title'));
+         const title = JSON.parse($(this).dataset.title);
 
          $(".modal-body #kinopoisk_id_edit").val( title.kinopoisk_id );
          $(".modal-body #title_edit").val( title.title );
