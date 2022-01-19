@@ -7,6 +7,8 @@ class AdminController extends Controller
     function __construct()
     {
         parent::__construct();
+        $this->check_admin();
+
         $this->model = new Admin();
     }
 
@@ -46,6 +48,14 @@ class AdminController extends Controller
             $this->model->add_title($_POST);
         } else {
             http_response_code(400);
+        }
+    }
+
+    private function check_admin() {
+        if (!isset($_SESSION["user"]["nickname"]) or $_SESSION["user"]["nickname"] !== "admin")
+        {
+            http_response_code(403);
+            exit;
         }
     }
 }
