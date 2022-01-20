@@ -184,7 +184,11 @@ $page = $data['page'];
             data: data,
             method: "DELETE",
             success: function () {
-                e.target.classList.add('disabled');
+                const row = e.target.parentNode.parentElement;
+                
+                $(row).fadeOut('slow', () => {
+                    row.remove();
+                })                              
             }
         });
     }
