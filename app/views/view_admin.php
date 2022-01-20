@@ -47,7 +47,7 @@ $page = $data['page'];
         <td>' . $title['title'] . '</td>
         <td>' . $title['rating'] . '</td>
         <td>' . $title['poster_url'] . '</td>
-        <td><button type="button" data-title=\'' . json_encode($title) .'\' class="btn btn-warning editModal">Edit</button></td>
+        <td><button type="button" onclick="openEditModal(event)" data-title=\'' . json_encode($title) .'\' class="btn btn-warning editModal">Edit</button></td>
         <td><button type="button" onclick="removeTitle(event, ' . $title['id'] . ')" class="btn btn-danger">Remove</button></td>
     </tr>';
     }
@@ -189,16 +189,18 @@ $page = $data['page'];
         });
     }
 
-    $(document).on("click", ".editModal", () => {
-         const title = JSON.parse($(this).dataset.title);
+    function openEditModal(e) {
+        e.preventDefault();
 
-         $(".modal-body #kinopoisk_id_edit").val( title.kinopoisk_id );
-         $(".modal-body #title_edit").val( title.title );
-         $(".modal-body #poster_url_edit").val( title.poster_url );
-         $(".modal-body #id_edit").val( title.id );
+        const title =  JSON.parse(e.target.dataset.title);
 
-         $('#edit-title-modal').modal('show');
-    });
+        $(".modal-body #kinopoisk_id_edit").val( title.kinopoisk_id );
+        $(".modal-body #title_edit").val( title.title );
+        $(".modal-body #poster_url_edit").val( title.poster_url );
+        $(".modal-body #id_edit").val( title.id );
+
+        $('#edit-title-modal').modal('show');
+    }
 
     $('#edit-title').submit((e) => {
         e.preventDefault();
